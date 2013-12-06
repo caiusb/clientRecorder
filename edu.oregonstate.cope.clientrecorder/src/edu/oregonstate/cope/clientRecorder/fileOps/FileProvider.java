@@ -1,12 +1,15 @@
 package edu.oregonstate.cope.clientRecorder.fileOps;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.oregonstate.cope.clientRecorder.RecorderFacade;
 
 /**
  * The file provider encapsulates file persistence rules. Each subclass provides
@@ -54,11 +57,10 @@ public abstract class FileProvider {
 		try {
 			Files.createDirectories(this.rootDirectory);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			RecorderFacade.instance().getLogger().error(this, e.getMessage(), e);
 		}
 
-		System.err.println(getClass().getSimpleName() + " set the root to " + this.rootDirectory.toString());
+		RecorderFacade.instance().getLogger().info(this, getClass().getSimpleName() + " set the root to " + this.rootDirectory.toString());
 	}
 
 	public void appendToCurrentFile(String string) {
@@ -73,8 +75,7 @@ public abstract class FileProvider {
 		try {
 			Files.write(getCurrentFilePath(), string.getBytes(), options);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			RecorderFacade.instance().getLogger().error(this, e.getMessage(), e);
 		}
 	}
 
@@ -83,10 +84,10 @@ public abstract class FileProvider {
 			return new ArrayList<String>();
 
 		try {
-			return Files.readAllLines(getCurrentFilePath(), null);
+			return Files.readAllLines(getCurrentFilePath(), Charset.defaultCharset());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			RecorderFacade.instance().getLogger().error(this, e.getMessage(), e);
 		}
 
 		return null;
@@ -97,7 +98,7 @@ public abstract class FileProvider {
 			return getCurrentFilePath().toFile().length() == 0;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			RecorderFacade.instance().getLogger().error(this, e.getMessage(), e);
 		}
 		return false;
 	}

@@ -1,5 +1,6 @@
 package edu.oregonstate.cope.fileSender;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
@@ -13,6 +14,9 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import edu.oregonstate.cope.clientRecorder.RecorderFacade;
+import edu.oregonstate.cope.eclipse.COPEPlugin;
+
 //import org.slf4j.*;
 
 public class FTPConnectionProperties extends AbstractUIPlugin {
@@ -24,7 +28,7 @@ public class FTPConnectionProperties extends AbstractUIPlugin {
 	private static final byte[] SALT = { (byte) 0xde, (byte) 0x33, (byte) 0x9,
 			(byte) 0x12, (byte) 0xda, (byte) 0x34, (byte) 0x8, (byte) 0x42, };
 
-	protected final static String PROPERTIES_PATH = "resources/ftp.properties";
+	protected final static String PROPERTIES_PATH = "resources" + File.separator + "ftp.properties";
 	
 	protected static PropertyResourceBundle ftpProperties;
 		
@@ -44,7 +48,7 @@ public class FTPConnectionProperties extends AbstractUIPlugin {
 						FTPConnectionProperties.getInstance().getBundle(), new Path(PROPERTIES_PATH), false
 					));
 			} catch (IOException e) {
-				e.printStackTrace();
+				COPEPlugin.getDefault().getLogger().error(FTPConnectionProperties.class, e.getMessage(), e);
 			}
 		}
 		return ftpProperties;
