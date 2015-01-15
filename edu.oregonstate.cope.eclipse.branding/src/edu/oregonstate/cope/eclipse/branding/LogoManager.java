@@ -33,7 +33,7 @@ public class LogoManager {
 	private class CheckForUpdatesJob extends Job {
 
 
-		private static final String UPDATE_SITE = "http://cope.eecs.oregonstate.edu/client-recorder";
+		private static final String UPDATE_SITE = "http://web.engr.oregonstate.edu/~digd/courses/cs361_W15/update-site";
 		private static final String FEATURE_NAME = "edu.oregonstate.cope.eclipse.feature.feature.group";
 
 		public CheckForUpdatesJob(String name) {
