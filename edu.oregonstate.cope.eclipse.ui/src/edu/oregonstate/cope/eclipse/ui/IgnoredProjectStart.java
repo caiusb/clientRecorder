@@ -12,15 +12,15 @@ public class IgnoredProjectStart implements InitializeWorkspaceOperation {
 
 	@Override
 	public void doInit() {
-		List<String> listOfWorkspaceProjects = COPEPlugin.getDefault().getListOfWorkspaceProjects();
-		if (listOfWorkspaceProjects.size() == 0)
-			return;
-		ProjectSelectionDialog projectSelectionDialog = 
-				new ProjectSelectionDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
-						listOfWorkspaceProjects);
-		projectSelectionDialog.open();
-		List<String> ignoredProjects = projectSelectionDialog.getIgnoredProjects();
-		COPEPlugin.getDefault().setIgnoredProjectsList(ignoredProjects);
+//		List<String> listOfWorkspaceProjects = COPEPlugin.getDefault().getListOfWorkspaceProjects();
+//		if (listOfWorkspaceProjects.size() == 0)
+//			return;
+//		ProjectSelectionDialog projectSelectionDialog = 
+//				new ProjectSelectionDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
+//						listOfWorkspaceProjects);
+//		projectSelectionDialog.open();
+//		List<String> ignoredProjects = projectSelectionDialog.getIgnoredProjects();
+//		COPEPlugin.getDefault().setIgnoredProjectsList(ignoredProjects);
 	}
 
 }
