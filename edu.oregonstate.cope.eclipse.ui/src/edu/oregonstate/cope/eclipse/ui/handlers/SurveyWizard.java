@@ -17,6 +17,8 @@ public class SurveyWizard extends Wizard implements SurveyProvider {
 	private JSONObject surveyAnswers;
 	private String email;
 
+	private String onid;
+
 	public SurveyWizard() {
 		super();
 		setNeedsProgressMonitor(true);
@@ -43,6 +45,11 @@ public class SurveyWizard extends Wizard implements SurveyProvider {
 			public String getEmail() {
 				return "test email";
 			}
+
+			@Override
+			public String getOnid() {
+				return "test onid";
+			}
 		};
 	}
 
@@ -59,6 +66,8 @@ public class SurveyWizard extends Wizard implements SurveyProvider {
 		surveyAnswers.remove("email");
 
 		this.email = getRandomEmailIfAbsent(email);
+		this.onid = (String) surveyAnswers.get("onid");
+		surveyAnswers.remove("onid");
 
 		return true;
 	}
@@ -92,5 +101,10 @@ public class SurveyWizard extends Wizard implements SurveyProvider {
 	@Override
 	public String getEmail() {
 		return email;
+	}
+
+	@Override
+	public String getOnid() {
+		return onid;
 	}
 }

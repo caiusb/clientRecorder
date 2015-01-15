@@ -34,6 +34,7 @@ public class SurveyPage extends WizardPage {
 	 */
 	private Map<String, List<Button>> qAndA;
 	private Text emailInput;
+	private Text onidInput;
 
 	protected SurveyPage() {
 		super("Survey");
@@ -88,10 +89,31 @@ public class SurveyPage extends WizardPage {
 		        }
 		      }
 		    });
-		    GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-		    emailInput.setLayoutData(gd);
-		    // Required to avoid an error in the system
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+		emailInput.setLayoutData(gd);
+		// Required to avoid an error in the system
+		
+		Composite onidLine = new Composite(emailComposite, SWT.NONE);
+		addGridLayout(onidLine);
+		Label onidPrompt = new Label(onidLine, SWT.NONE);
+		onidPrompt.setText("ONID");
 		 	
+		onidInput = new Text(onidLine, SWT.BORDER | SWT.SINGLE);
+		onidInput.setText("");
+		onidInput.addKeyListener(new KeyListener() {
+		      @Override
+		      public void keyPressed(KeyEvent e) {
+		      }
+		      @Override
+		      public void keyReleased(KeyEvent e) {
+		    	  if (isPageComplete()){
+						setPageComplete(true);
+		        }
+		      }
+		    });
+		GridData gridDataOnid = new GridData(GridData.FILL_HORIZONTAL);
+		onidInput.setLayoutData(gridDataOnid);
+		// Required to avoid an error in the system
 		
 		scrolledComposite.setContent(questions);
 		scrolledComposite.setExpandHorizontal(true);
@@ -188,6 +210,7 @@ public class SurveyPage extends WizardPage {
 			}
 		}
 		resultObject.put("email", emailInput.getText());
+		resultObject.put("onid", onidInput.getText());
 		return resultObject;
 	}
 }
